@@ -5,10 +5,6 @@ export class Negociacao {
         this._valor = _valor;
     }
     get data() {
-        /**
-         * Dava pra manipular a data utilizando métodos de setDate()
-         * Retornando uma nova referência "identica" defendemos a alteração do nosso registro
-         */
         const data = new Date(this._data.getTime());
         return data;
     }
@@ -20,5 +16,12 @@ export class Negociacao {
     }
     get volume() {
         return this._quantidade * this._valor;
+    }
+    static criaDe(stringData, stringQuantidade, stringValor) {
+        const exp = /-/g;
+        const date = new Date(stringData.replace(exp, ','));
+        const quantidade = parseInt(stringQuantidade);
+        const valor = parseFloat(stringValor);
+        return new Negociacao(date, quantidade, valor);
     }
 }
